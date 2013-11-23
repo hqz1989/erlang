@@ -9,6 +9,8 @@ http://www.theultra.org/
 
 第1章 Erlang教程
 http://svn.liancheng.info/cpie-cn/trunk/.build/html/part-i/chapter-1.html
+综合
+http://blog.csdn.net/turingbooks/article/details/3247749
 
 http://www.oschina.net/question/12_5320
 http://wenku.baidu.com/link?url=Ors5AW49j9hnjzkg86PupUFVrS273PaQw9So3qVAj_-dk1Oi_JpXS9aKcGaF5vt2yzeIpZd77BAzMFkUQsk92D53DQUPMX5kTgg2hbWP3NC
