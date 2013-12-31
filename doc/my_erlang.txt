@@ -1,0 +1,67 @@
+﻿1.数字类型，需要注意两点
+    1）B#Val表示以B进制存储的数字Val
+        2#101               5
+    2）$Char表示字符Char的ascii编码
+        A                   65
+2.atom，可以理解成常量，它可以包含任何字符，以小写字母开头，如果不是以小写字母开头或者是字母之外的符号，需要用单引号包括起来
+    abc
+    'AB'
+3.Tuple
+    {1,2,3,4,5}.
+    {a,b,c,1,2}.
+    size({1,2,3,a,b,c}).
+4.list
+    [123, xyz].
+    [123, def, abc].
+    [{person, 'Joe', 'Armstrong'},
+        {person, 'Robert', 'Virding'},
+        {person, 'Mike', 'Williams'}
+    ].
+    "abc"                   [97,98,99]
+    length([1,2,3]).
+6.Erlang中变量有两个特点：
+    1）变量必须以大写字母或者下划线开头，可以包含字母、下划线和@
+    2）变量只能绑定一次，也就是所谓的Single Assignment。或者以一般的说法就是只能赋值一次，其实Erlang并没有赋值这样的概念,=号也是用于验证匹配。
+7.模式匹配——Pattern Matching
+    [A,B|C] = [1,2,3,4,5,6,7]
+    A               1
+    B               2
+    C               [3,4,5,6,7]
+    -----Succeeds - binds A = 1, B = 2, C = [3,4,5,6,7]
+    
+    [H|T] = [abc]
+    -----Succeeds - binds H = abc, T = []
+8.module
+    函数定义
+    example：
+    helloWorld.erl                  
+    -module(helloWorld).            -- 模块名称必须与源文件名相同
+    -export([run/1]).               -- 函数定义失败时，导出会提示错误,run/1指的是有一个参数的run函数，因为Erlang允许定义同名的有不同参数的多个函数，通过指定/1来说明要导出的是哪个函数
+    run(Name)->                     -- 大写开头的是变量Name，调用io模块的format方法输出，~w可以理解成占位符，将被实际Name取代，~n就是换行了。函数定义完了要以句号：“.”结束
+        io:format("Hello World ~w~n", [Name]).
+    
+    执行  cd("E:/erlang").
+         c(helloWorld).             -- 编译源代码helloworld.erl
+         helloWorld:run(lllll).
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
