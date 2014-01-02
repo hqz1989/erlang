@@ -1,4 +1,8 @@
-﻿1.数字类型，需要注意两点
+﻿site
+http://blog.csdn.net/liuxuezong/article/details/7666153    -- example      
+http://mryufeng.iteye.com/blog/472840                       -- erlang grammar
+
+1.数字类型，需要注意两点
     1）B#Val表示以B进制存储的数字Val
         2#101               5
     2）$Char表示字符Char的ascii编码
@@ -43,25 +47,96 @@
     执行  cd("E:/erlang").
          c(helloWorld).             -- 编译源代码helloworld.erl
          helloWorld:run(lllll).
+
+9.example
+http://blog.csdn.net/liuxuezong/article/details/7666153         
+
+10.变量必须大写，在函数定义时, 当匿名函数付给变量是也需要首字母大写
+total([{What,N}|T]) -> shop:cost(What) * N + total(T);
+但是只匹配用的，无需大写，例如这里的milk
+cost(milk)-> 7.
+
+11.匿名函数， 使用关键字fun
+Z = fun(X) -> 2 * X end.
+Z(2).
+Double = Z.
+Double(4).
+Double(4,5).
+** exception error: interpreted function with arity 1 called with two arguments
+d=Z.
+** exception error: no match of right hand side value #Fun<erl_eval.6.80484245>
+温度转换函数
+TempConvert = fun({c,C}) -> {f, 32 + C*9/5};({f,F}) -> {c, (F-32)*5/9}end.
+#Fun<erl_eval.6.82930912>
+9> TempConvert({c,100}).
+{f,212.0}
+10> TempConvert({f,212}).
+{c,100.0}
+
+12.函数体中定义函数
+outer( C ) –> Inner = fun(A, B) -> A + B + C end,  %% 注意","
+Inner(2, 3). 
+13.匿名函数可以当作对象赋给变量，命名函数同样也可以赋给变量。具体用法还是需要借助重要的fun关键字。比如， 
+MyFunction = fun outer / 1 
+
+14.函数的动态调用 
+ErLang有一个apply函数，可以动态调用某一个函数变量。 
+基本用法是 apply( 函数变量，函数参数列表 )。比如，上面的MyFunciton函数变量，就可以这么调用，apply( MyFunction, [ 5 ])。 
+那么我们能否根据一个字符串作为函数名获取一个函数变量呢？这样我们就可以根据一个字符串来动态调用某个函数了。 
+ErLang中，做到这一点很简单。前面讲过，函数名一旦定义了，自然就固定了，这也类似于常量名，属于不可变的atom（原子）。所有的atom都可以转换成字符串，也可以从字符串转换过来。ErLang中的字符串实质上都是List。字符串和atom之间的转换通过list_to_atom和atom_to_list来转换。 
+于是我们可以这样获取MyFunciton：MyFunction = list_to_atom(“outer”) 
+如果outer函数已经定义，那么MyFucntion就等于outer函数，如果outer函数没有定义，那么list_to_atom(“outer”)会产生一个新的叫做outer的atom，MyFucntion就等于这个新产生的atom。 
+如果需要强制产生一个已经存在的atom，那么我们需要调用list_to_existing_atom转换函数，这个函数不会产生新的atom，而是返回一个已经存在了的atom。
+
+15.Tuple和Record
+16.循环
+    -module(libmisc).
+    -export([for/3]).
+    for(Max, Max, F) -> [F(Max)];
+    for(I, Max, F) -> [F(I)|for(I+1, Max, F)].
+    use:
+    3> libmisc:for(1,10,fun(I) -> I end).
+    [1,2,3,4,5,6,7,8,9,10]
+    4> M = fun(I) -> I end.
+    5> libmisc:for(1,10,M).             
+    [1,2,3,4,5,6,7,8,9,10]
+    6> N = fun(I) -> I * I end.
+    7> libmisc:for(1,10,N).   
+    [1,4,9,16,25,36,49,64,81,100]
+    result:
+    for(1,10,M)
+    => [F(1)| for(2,10,M)]
+    => [F(1),F(2)| for(3,10,M)]
+    ...
+    => [F(1),F(2),F(3),F(4),F(5),F(6),F(7),F(8),F(9),F(10)]
     
+17.列表处理
+    %%%mylists.erl
+    -module(mylists).
+    -export([sum/1]).
+    sum([H|T]) -> H + sum(T);
+    sum([]) -> 0.
+    run:
+    L = [1,3,10].
+    mylists:sum(L).
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    %%%shop2.erl
+    -module(shop2).
+    -export([total/1]).
+    -import(lists, [map/2]).
+    total(L) -> mylists:sum(map(fun({What, N}) -> shop:cost(What) * N end, L)).
+    还可以定义成如下格式：
+    %%%shop2.erl
+    -module(shop2).
+    -export([total/1]).
+    -import(lists, [map/2, sum/1]).
+    -import(shop, [cost/1]).
+    total(L) ->sum(map(fun({What, N}) -> cost(What) * N end, L)).
+    • The declaration -import(lists, [map/2, sum/1]). means the function map/2 is imported from the module lists, and so on. This means we can write map(Fun, ...) instead of lists:map(Fun, ...). cost/1 was not declared in an import declaration, so we had to use the ―fully qualified‖ name shop:cost.
+    • The declaration -export([total/1]) means the function total/1 can be called from outside the module shop2. Only functions that are exported from a module can be called from outside the module.
+18.列表分解  可以编写断程序
+     L = [1,2,3,4,5].
+     lists:map(fun(X) -> 2 * X end, L).         == >> [2*X || X<-L].
+     
+     Buy=[{oranges,4},{newspaper,1},{apples,10},{pears,6},{milk,3}].
+      [{Name, 2*Number} || {Name, Number} <- Buy].
