@@ -1,7 +1,7 @@
 -module(shop).
 -export([cost/1]).
 
-cost(orange)->
+cost(oranges)->
     5;
 cost(newspaper)->
     8;
