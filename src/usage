@@ -1,0 +1,9 @@
+c(shop2).
+c(shop). 
+Buy = [{oranges, 4}, {newspaper, 1}, {apples, 10}, {pears, 6}, {milk, 3}].
+L1 = lists:map(fun({What, N}) ->shop:cost(What)*N end, Buy).
+c(mylists).
+mylists:sum(L1).
+
+
+

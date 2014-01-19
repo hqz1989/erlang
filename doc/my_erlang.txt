@@ -1,4 +1,4 @@
-﻿site
+﻿﻿site
 http://blog.csdn.net/liuxuezong/article/details/7666153     -- example ,beginer     
 http://mryufeng.iteye.com/blog/472840                       -- 实验Erlang语法对应的opcode 让你对erlang理解更深
 
@@ -143,4 +143,8 @@ ErLang中，做到这一点很简单。前面讲过，函数名一旦定义了�
      lists:map(fun(X) -> 2 * X end, L).         == >> [2*X || X<-L].
      
      Buy=[{oranges,4},{newspaper,1},{apples,10},{pears,6},{milk,3}].
-      [{Name, 2*Number} || {Name, Number} <- Buy].
+     [{Name, 2*Number} || {Name, Number} <- Buy].
+
+     列出单价和数量
+     [(shop:cost(A), B) || {A, B} <- Buy].
+     lists:sum([shop:cost(A)*B||{A, B} <-Buy]).   ==> this is shop3
