@@ -1,6 +1,10 @@
 ﻿site
-http://blog.csdn.net/liuxuezong/article/details/7666153    -- example      
-http://mryufeng.iteye.com/blog/472840                       -- erlang grammar
+http://blog.csdn.net/liuxuezong/article/details/7666153     -- example ,beginer     
+http://mryufeng.iteye.com/blog/472840                       -- 实验Erlang语法对应的opcode 让你对erlang理解更深
+
+env distel
+http://blog.csdn.net/thomescai/article/details/7461768
+http://jixiuf.github.io/erlang/distel.html
 
 1.数字类型，需要注意两点
     1）B#Val表示以B进制存储的数字Val
