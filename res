@@ -6,7 +6,10 @@ http://www.erlang.org/download.html
 http://learnyousomeerlang.com/content
 http://www.theultra.org/erlangDocRoot/doc/getting_started/part_frame.html 
 http://www.theultra.org/
-
+// net
+http://hideto.iteye.com/blog/246373
+http://blog.yufeng.info/archives/105
+http://coderplay.iteye.com/blog/94209
 //////////////////
 http://www.blogjava.net/killme2008/archive/2007/06/13/123860.html
 第1章 Erlang教程

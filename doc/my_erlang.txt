@@ -2,6 +2,10 @@
 http://blog.csdn.net/liuxuezong/article/details/7666153     -- example ,beginer     
 http://mryufeng.iteye.com/blog/472840                       -- 实验Erlang语法对应的opcode 让你对erlang理解更深
 
+http://blog.yufeng.info/archives/105  **
+http://coderplay.iteye.com/blog/94209
+http://hideto.iteye.com/blog/246373
+
 env distel
 http://blog.csdn.net/thomescai/article/details/7461768
 http://jixiuf.github.io/erlang/distel.html
