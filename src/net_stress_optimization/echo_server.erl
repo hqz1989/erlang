@@ -17,3 +17,4 @@ print(A)->
 stop()->
     sub1 ! stop,ok.
     
+%%http://hideto.iteye.com/blog/246373

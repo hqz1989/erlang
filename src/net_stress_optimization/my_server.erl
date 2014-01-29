@@ -4,3 +4,4 @@ start(Port) ->
   
 business_logic(Socket) ->  
   % Read data from the network socket and do our thang!  
+%%http://hideto.iteye.com/blog/246373

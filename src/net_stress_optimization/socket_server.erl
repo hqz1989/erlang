@@ -47,3 +47,4 @@ handle_call(_Msg, _Caller, State) -> {noreply, State}.
 handle_info(_Msg, Library) -> {noreply, Library}.  
 terminate(_Reason, _Library) -> ok.  
 code_change(_OldVersion, Library, _Extra) -> {ok, Library}. 
+%%http://hideto.iteye.com/blog/246373
