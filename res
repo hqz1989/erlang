@@ -10,12 +10,17 @@ http://www.theultra.org/
 http://hideto.iteye.com/blog/246373
 http://blog.yufeng.info/archives/105
 erlang网络编程的几个性能调优和注意点
-    http://coderplay.iteye.com/blog/94209       
+    http://coderplay.iteye.com/blog/94209    
 系列bogle
     http://hideto.iteye.com/blog/246373         
     http://blog.csdn.net/cbsying/article/details/8027506
-Programming Erlang  / www.trapexit.org / www.erlang.org
+
+//////book
+Programming Erlang: Software for a Concurrent World / erlang 程序设计 / www.trapexit.org / www.erlang.org
 Erlang/OTP并发编程实战
+
+Designing for Scalability with Erlang/OTP: Implementing Robust, Fault-Tolerant Systems
+The Erlang Runtime System
 国内erlang的高价值的博文，有一大半是来自余峰，所以他的博客和博客合集《erlang深度分析.pdf》
 新博客地址： http://blog.yufeng.info/
 旧博客地址： http://mryufeng.iteye.com/
@@ -33,3 +38,18 @@ http://wenku.baidu.com/link?url=Ors5AW49j9hnjzkg86PupUFVrS273PaQw9So3qVAj_-dk1Oi
 
 //some advice
 http://www.aqee.net/functional-programming-is-hard-thats-why-its-good/
+
+//other site
+https://code.google.com/p/retlang/
+
+http://svn.liancheng.info/cpie-cn/trunk/.build/html/part-i/chapter-1.html
+http://coderplay.iteye.com/blog/94209
+http://chaoslawful.iteye.com/blog/310346
+http://www.douban.com/group/topic/23688164/
+http://www.cnblogs.com/me-sa/category/304370.html
+http://www.ibm.com/developerworks/cn/aix/library/au-learning_erlang/index.html
+http://mryufeng.iteye.com/category/17139
+http://erlangdisplay.iteye.com/category/127758
+http://blog.yufeng.info/
+http://wenku.baidu.com/link?url=-mpPk5SI3WN6rLpJzkI3U59bzp76jIpgPtbAHTGGXfvAp4oibnUtbIuxOOvuU0RPAeuFN9bV4dxd5XdJL6zxAJnVzmzUfb5_MQEUQTaC9ye
+http://www.douban.com/note/88897647/

@@ -1,0 +1,5 @@
+p23
+    C + G, Q, enter   退出
+p24 2.2.3 CEAN
+    example: http://pragmaticprogrammer.com/titles/jaerlang/code.html
+p26 ->
