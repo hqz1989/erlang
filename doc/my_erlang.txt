@@ -57,44 +57,44 @@ couchdb(file db) ejabberd(jabber) mochiweb(http) nitrogen(web depend event) rabb
          helloWorld:run(lllll).
 
 9.example
-http://blog.csdn.net/liuxuezong/article/details/7666153         
+    http://blog.csdn.net/liuxuezong/article/details/7666153         
 
 10.变量必须大写，在函数定义时, 当匿名函数付给变量是也需要首字母大写
-total([{What,N}|T]) -> shop:cost(What) * N + total(T);
-但是只匹配用的，无需大写，例如这里的milk
-cost(milk)-> 7.
+    total([{What,N}|T]) -> shop:cost(What) * N + total(T);
+    但是只匹配用的，无需大写，例如这里的milk
+    cost(milk)-> 7.
 
 11.匿名函数， 使用关键字fun
-Z = fun(X) -> 2 * X end.
-Z(2).
-Double = Z.
-Double(4).
-Double(4,5).
-** exception error: interpreted function with arity 1 called with two arguments
-d=Z.
-** exception error: no match of right hand side value #Fun<erl_eval.6.80484245>
-温度转换函数
-TempConvert = fun({c,C}) -> {f, 32 + C*9/5};({f,F}) -> {c, (F-32)*5/9}end.
-#Fun<erl_eval.6.82930912>
-9> TempConvert({c,100}).
-{f,212.0}
-10> TempConvert({f,212}).
-{c,100.0}
+    Z = fun(X) -> 2 * X end.
+    Z(2).
+    Double = Z.
+    Double(4).
+    Double(4,5).
+    ** exception error: interpreted function with arity 1 called with two arguments
+    d=Z.
+    ** exception error: no match of right hand side value #Fun<erl_eval.6.80484245>
+    温度转换函数
+    TempConvert = fun({c,C}) -> {f, 32 + C*9/5};({f,F}) -> {c, (F-32)*5/9}end.
+    #Fun<erl_eval.6.82930912>
+    9> TempConvert({c,100}).
+    {f,212.0}
+    10> TempConvert({f,212}).
+    {c,100.0}
 
 12.函数体中定义函数
-outer( C ) –> Inner = fun(A, B) -> A + B + C end,  %% 注意","
-Inner(2, 3). 
+    outer( C ) –> Inner = fun(A, B) -> A + B + C end,  %% 注意","
+    Inner(2, 3). 
 13.匿名函数可以当作对象赋给变量，命名函数同样也可以赋给变量。具体用法还是需要借助重要的fun关键字。比如， 
-MyFunction = fun outer / 1 
+    MyFunction = fun outer / 1 
 
 14.函数的动态调用 
-ErLang有一个apply函数，可以动态调用某一个函数变量。 
-基本用法是 apply( 函数变量，函数参数列表 )。比如，上面的MyFunciton函数变量，就可以这么调用，apply( MyFunction, [ 5 ])。 
-那么我们能否根据一个字符串作为函数名获取一个函数变量呢？这样我们就可以根据一个字符串来动态调用某个函数了。 
-ErLang中，做到这一点很简单。前面讲过，函数名一旦定义了，自然就固定了，这也类似于常量名，属于不可变的atom（原子）。所有的atom都可以转换成字符串，也可以从字符串转换过来。ErLang中的字符串实质上都是List。字符串和atom之间的转换通过list_to_atom和atom_to_list来转换。 
-于是我们可以这样获取MyFunciton：MyFunction = list_to_atom(“outer”) 
-如果outer函数已经定义，那么MyFucntion就等于outer函数，如果outer函数没有定义，那么list_to_atom(“outer”)会产生一个新的叫做outer的atom，MyFucntion就等于这个新产生的atom。 
-如果需要强制产生一个已经存在的atom，那么我们需要调用list_to_existing_atom转换函数，这个函数不会产生新的atom，而是返回一个已经存在了的atom。
+    ErLang有一个apply函数，可以动态调用某一个函数变量。 
+    基本用法是 apply( 函数变量，函数参数列表 )。比如，上面的MyFunciton函数变量，就可以这么调用，apply( MyFunction, [ 5 ])。 
+    那么我们能否根据一个字符串作为函数名获取一个函数变量呢？这样我们就可以根据一个字符串来动态调用某个函数了。 
+    ErLang中，做到这一点很简单。前面讲过，函数名一旦定义了，自然就固定了，这也类似于常量名，属于不可变的atom（原子）。所有的atom都可以转换成字符串，也可以从字符串转换过来。ErLang中的字符串实质上都是List。字符串和atom之间的转换通过list_to_atom和atom_to_list来转换。 
+    于是我们可以这样获取MyFunciton：MyFunction = list_to_atom(“outer”) 
+    如果outer函数已经定义，那么MyFucntion就等于outer函数，如果outer函数没有定义，那么list_to_atom(“outer”)会产生一个新的叫做outer的atom，MyFucntion就等于这个新产生的atom。 
+    如果需要强制产生一个已经存在的atom，那么我们需要调用list_to_existing_atom转换函数，这个函数不会产生新的atom，而是返回一个已经存在了的atom。
 
 15.Tuple和Record
 16.循环
@@ -152,3 +152,146 @@ ErLang中，做到这一点很简单。前面讲过，函数名一旦定义了�
      列出单价和数量
      [(shop:cost(A), B) || {A, B} <- Buy].
      lists:sum([shop:cost(A)*B||{A, B} <-Buy]).   ==> this is shop3
+19.area({circle, R}) -> 3.14159*R*R
+    大写字母开头代表变量如 R
+    小写字母开头代表atom（常量）
+    
+20.
+erlang module的所有BIFs列表见:http://www.erlang.org/doc/man/erlang.html 
+
+21.编译 运行
+    .查看/添加代码查找路径 
+    code:get_path().  
+    code:add_patha(Dir).  
+    code:add_pathz(Dir).  
+    erl -pa Dir1 -pa Dir2 ... -pz DirK1 -pz DirK2 
+    .查看载入的module和查看出错的module 
+    code:all_loaded().  
+    code:clash().  
+    可以将code:add_patha()和code:add_pathz()扔到.erlang文件 
+    .运行
+    $ erl  
+    1> c(hello).  
+    2> hello:start().  
+    %%%%%%%%%%%%%  
+    $ erlc hello.erl  
+    $ erl -noshell -s hello start -s init stop  
+    %%%%%%%%%%%%%  
+    hello.sh
+    #!/bin/sh  
+    erl -noshell -pa /home/joe/code -s hello start -s init stop  
+    %%%%%%%%%%%%%  
+    -module(main).  
+    -export([main/1]).  
+    fac(0) -> 1;  
+    fac(N) -> N*fac(N-1).  
+    main([A]) ->  
+        I = list_to_integer(atom_to_list(A)),  
+        F = fac(I),  
+        io:format("factorial ~w = ~w~n", [I, F]),  
+        init:stop().  
+    %%%%%%%%%%%%  
+    $ erlc main.erl  
+    $ erl -noshell -s main main 25  
+    factorial 25 = 15511210043330985984000000  
+    
+    .使用Makefile构建Erl程序 
+    //////////////////////////////////
+        % Makefile.template  
+        # leave these lines alone  
+        .SUFFIXED: .erl .beam .yrl  
+          
+        .erl.beam:  
+          erlc -W $<  
+          
+        .yrl.erl:  
+          erlc -W $<  
+          
+        ERL = erl -boot start_clean  
+          
+        # Here's a list of the erlang modules you want compiling  
+        # If the modules don't fit onto one line add a \ character  
+        # to the end of the lien and continue on the next line  
+          
+        # Edit the lines below  
+        MODS = module1 module2 \  
+               module3 ... special1 ...\  
+               ...  
+               moduleN  
+          
+        # The first target in any makefile is the default target.  
+        # If you just type "make" then "make all" is assumed (because  
+        # "all" is the first target in this makefile)  
+          
+        all: compile  
+          
+        compile: ${MODS:%=%.beam} subdirs  
+          
+        ## special compilation requirements are added here  
+          
+        special1.beam: special1.erl  
+          ${ERL} -Dflag1 -WO special1.erl  
+          
+        ## run an application from the makefile  
+          
+        application1: compile  
+          ${ERL} -pa Dir1 -s application1 start Arg1 Arg2  
+          
+        # the subdirs target compiles any code in  
+        # sub-directories  
+          
+        subdirs:  
+          cd dir1; make  
+          cd dir2; make  
+          ...  
+          
+        # remove all the code  
+          
+        clean:  
+          rm -rf *.beam erl_crash.dump  
+          cd dir1; make clean  
+          cd dir2; make clean 
+        /////////////////          
+        .Getting Help 
+        $ erl -man lists  
+        .如果Erlang crash掉了，它会生成一个erl_crash.dump文件，有一个基于Web的crash分析工具 
+        webtool:start().  
+22.
+    erl -sname hideto表示在本地启动一个Erlang节点，名字为hideto 
+    如果两个节点在同一机器上，或者没有DNS服务，只能用-sname参数，s表示short 
+    不同的机器上使用-name参数来启动节点 
+    具体分布式http://hideto.iteye.com/blog/227837
+    
+23.Record -- http://hideto.iteye.com/blog/241246
+    .定义
+    -module(my_server).  
+    -record(server_opts,  
+        {port,  
+        ip="127.0.0.1",         %% 默认值
+        max_connections=10}).   %% 默认值
+    % The rest of your code goes here.  
+    .创建
+    Opts1 = #server_opts{port=80}.          %% 使用默认值
+    Opts2 = #server_opts{port=80, ip="192.168.0.1"}.  
+    .访问
+    Opts = #server_opts{port=80, ip="192.168.0.1"},  
+        内部结构
+        {server_opts, 80, "127.0.0.1", 10}  
+    .更新Record 
+    Opts = #server_opts{port=80, ip="192.168.0.1"},  
+    NewOpts = Opts#server_opts{port=7000}.  
+    .匹配Record和Guard语句 
+        handle(Opts=#server_opts{port=8000}) ->  
+        % do special port 8080 stuff  
+        handle(Opts=#server_opts{} ->  
+        % default stuff  
+        ***another example（binding port less 1024 need root right）
+        handle(Opts) when Opts#server_opts.port <= 1024 ->  
+        % requires root access  
+        handle(Opts=#server_opts{}) ->  
+        % Doesn't require root access  
+        Opts#server_opts.port  
+    .如果你想在运行时添加和删除field，或者你在运行时才能确定有哪些field，这时你应该使用dict而不是Record
+    
+24. Erlang make
+    http://hideto.iteye.com/blog/245540
