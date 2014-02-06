@@ -1,11 +1,15 @@
 ﻿﻿site
 http://blog.csdn.net/liuxuezong/article/details/7666153     -- example ,beginer     
 http://mryufeng.iteye.com/blog/472840                       -- 实验Erlang语法对应的opcode 让你对erlang理解更深
+erlang 闪电入门
 
 env distel
 http://blog.csdn.net/thomescai/article/details/7461768
 http://jixiuf.github.io/erlang/distel.html
 
+project
+couchdb(file db) ejabberd(jabber) mochiweb(http) nitrogen(web depend event) rabbitmq(middle) yaws(webserver) etorrent(bittorren) Scalaris(key-value) disco(map-reduce)
+ 
 1.数字类型，需要注意两点
     1）B#Val表示以B进制存储的数字Val
         2#101               5

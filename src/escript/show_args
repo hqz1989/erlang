@@ -1,0 +1,12 @@
+#!/usr/bin/env escript
+-module(show_args).
+-mode(compile).
+-compile(export_all).
+
+main(Args)      ->
+           show_args(Args, 0).
+show_args([], _)           -> ok;
+show_args([H|T], N)        ->
+                 io:format("~b. '~s'\n", [N, H]),
+                 show_args(T, N+1).
+
