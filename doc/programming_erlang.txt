@@ -24,5 +24,16 @@ p43
     io:format("consulting .erlang in ~p~n"), [element(2, file:get_cwd())].
     c:cd("c:/work").
     ......
-p44
-    
+p49
+    Even = fun(X) -> (X rem 2) =:= 0 end.
+
+    返回fun 的fun
+    Fruit = [apple, pear, orange]
+    MakeTest = fun(L) -> (fun(X) -> lists:member(X,L) end) end.
+    IsFruit = MakeTest(Fruit).
+    using: 
+    IsFruit(pear).     ==> true
+
+    lists:map filter member
+    lib_misc:for(1,10,fun(I) -> I*I end).
+p53
