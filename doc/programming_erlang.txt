@@ -2,4 +2,27 @@ p23
     C + G, Q, enter   退出
 p24 2.2.3 CEAN
     example: http://pragmaticprogrammer.com/titles/jaerlang/code.html
-p26 ->
+p26 
+    推出（linux Ctrl+C/ windows ctrl+break）
+    >16#cafe * 32#sugar.        %指定进制的乘法
+p32 
+    >5 div 3    1
+    >5 rem 3    2
+    >4/2        2.0000
+    atom 常量 小写字母或""
+    Preson = {Person,
+                {name, joe},
+                {height, 1.82}
+                {footsize, 42}}.
+    {point, x, y} = {point, 10, 20}
+    {_, x, y} = {point, 10, 20}
+p37
+    字符存成ASCII
+    f() 释放所有绑定
+p43
+    erl5.4.12/.erlang 中添加
+    io:format("consulting .erlang in ~p~n"), [element(2, file:get_cwd())].
+    c:cd("c:/work").
+    ......
+p44
+    

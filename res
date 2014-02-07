@@ -15,7 +15,7 @@ erlang网络编程的几个性能调优和注意点
     http://hideto.iteye.com/blog/246373         
     http://blog.csdn.net/cbsying/article/details/8027506
 
-//////book
+//////book  -- http://it-ebooks.info/
 Programming Erlang: Software for a Concurrent World / erlang 程序设计 / www.trapexit.org / www.erlang.org
 Erlang/OTP并发编程实战
 
