@@ -34,6 +34,13 @@ p49
     using: 
     IsFruit(pear).     ==> true
 
-    lists:map filter member
+    lists:map(fun, L)             ----- 对列表L每个元素实施fun方法，结果形成列表返回
+          filter(fun, L)          ----- 对列表L每个元素实施fun方法，将返回true的元素形成列表返回
+          member(X, L)            ----- 检验X是否在数组L中
+          sum(L)                  ----- 对列表L求和
     lib_misc:for(1,10,fun(I) -> I*I end).
-p53
+p54
+    列表解析
+    L = [1,2,3,4]
+    [2*X || X < L] ==> [2,4,6,8]
+p67
