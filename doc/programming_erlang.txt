@@ -43,4 +43,45 @@ p54
     列表解析
     L = [1,2,3,4]
     [2*X || X < L] ==> [2,4,6,8]
-p67
+p70
+    catch 原语 捕捉erlang:error(a) 会有详细的信息
+    包装math:sqrt(-1) 的错误消息
+p71 通用风格
+    f(X) 返回 {ok, Val}, {error, Why}
+    1)
+    case f(X) of
+        {ok, Val} -> 
+            do_some_thing_with(Val)
+        {error, Why} ->
+            %% ...
+     2)
+     {ok, Val} = f(X),
+     do_some_thing_with(Val);  %% 如果返回错误 会因为匹配失败而抛出异常
+     3)
+     my_func(X) ->
+        case ... of
+            ... -> throw({thisError, ...})
+            ... -> throw({someOtherError, ...})
+     
+     try my_func(X)
+     catch
+        throw:{thisError, X} -> ...
+        throw:{someOtherError, X} -> ...
+     end
+     4) 捕获所有
+     try Expr
+     catch
+        _:_ -> ... handle all exceptions
+     end
+     5) 忽略异常标签并按下面的方式写，，将不能捕获所有错误
+     try Expr
+     catch
+        _ -> ... handle all 
+     end
+     6) 通常风格*****
+     try foo(...) of
+        Val -> ...
+     catch
+        exit: why -> ...
+     end
+p74
