@@ -85,3 +85,11 @@ p71 通用风格
         exit: why -> ...
      end
 p74
+    tuple_to_list({1, 2, 3}).     == > [1,2,3]
+    time().                       == > {20,0,3}
+p75
+    list_to_binary([Bin1, 1, [2,3,Bin2], 4|Bin3]).
+    @spec split_binary(Bin, Pos)   -> {Bin1, Bin2}
+    @spec term_to_binary(Term)  -> Bin      % 任意数据转换成二进制
+    @spec binary_to_term(Bin)   -> Term     % 二进制数据还原
+    @spec size(Bin) -> Int                  % 二进制数据长度

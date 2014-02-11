@@ -15,10 +15,9 @@ erlang网络编程的几个性能调优和注意点
     http://hideto.iteye.com/blog/246373         
     http://blog.csdn.net/cbsying/article/details/8027506
 
-//////book  -- http://it-ebooks.info/
+//////book
 Programming Erlang: Software for a Concurrent World / erlang 程序设计 / www.trapexit.org / www.erlang.org
 Erlang/OTP并发编程实战
-
 Designing for Scalability with Erlang/OTP: Implementing Robust, Fault-Tolerant Systems
 The Erlang Runtime System
 国内erlang的高价值的博文，有一大半是来自余峰，所以他的博客和博客合集《erlang深度分析.pdf》
@@ -38,6 +37,22 @@ http://wenku.baidu.com/link?url=Ors5AW49j9hnjzkg86PupUFVrS273PaQw9So3qVAj_-dk1Oi
 
 //some advice
 http://www.aqee.net/functional-programming-is-hard-thats-why-its-good/
+
+// 遇到问题
+参看Erlang官方文档 http://www.erlang.org/doc/
+订阅Erlang的maillist（http://www.erlang.org/mailman/listinfo/erlang-questions），进行提问
+在Nabble提供的Erlang maillist存档中搜索（http://www.nabble.com/Erlang-f14095.html）
+// 推荐阅读
+Erlang Design Principles （http://www.erlang.org/doc/design_principles/part_frame.html）
+Erlang Efficiency Guide （http://www.erlang.org/doc/efficiency_guide/part_frame.html）
+Erlang Programming Rules （http://www.erlang.se/doc/programming_rules.shtml）
+// 推荐网站
+http://www.erlang.org
+http://erlang-china.org
+http://trapexit.org （国内封锁，可以使用http://trapexit.org.nyud.net:8080/ 或其他代理登录）
+http://toquick.com
+http://blog.socklabs.com/
+http://www.planeterlang.org/
 
 //other site
 https://code.google.com/p/retlang/
