@@ -93,3 +93,4 @@ p75
     @spec term_to_binary(Term)  -> Bin      % 任意数据转换成二进制
     @spec binary_to_term(Bin)   -> Term     % 二进制数据还原
     @spec size(Bin) -> Int                  % 二进制数据长度
+p93
