@@ -94,3 +94,45 @@ p75
     @spec binary_to_term(Bin)   -> Term     % 二进制数据还原
     @spec size(Bin) -> Int                  % 二进制数据长度
 p93
+    c(ml, {d, debug}).
+    func([{tag, {one, A} = Z1, B} = Z2]) ->
+        ...using Z1 Z2 call other fun
+p95 进程字典
+    @spec put(Key, Value) -> OldValue.
+    @spec get(Key) -> Value.
+    
+p100 停止
+    erlang:halt().
+    q().
+    code:get_path().  %% 获得系统默认加载路径
+    @spec code:add_patha(Dir) => true | {error, bad_directory}  %% add to head
+    @spec code:add_pathz(Dir) => true | {error, bad_directory}  %% add to tail
+    @spec code:all_load() => [] %% all module loaded
+    code:clash() %% check crash reason
+    ~/.erlang
+    home path: init:get_argument(home).
+p102 run hello.erl
+    1)  c(hello).
+        hello:start().
+    2)  erlc hello.erl
+        erl -noshell -s hello start -s init stop  %%　必须编译过, hello.beam
+    3)  erl -eval 'io:forate("Memory: ~p~n", [erlang:memory(total)]).' -noshell -s init stop
+    4) hello.sh
+    #!/bin/sh
+    erl -noshell -pa /home/yu -s hello start -s init stop
+    5) hello
+    #!/usr/bin/env escript
+    main(_) -> io:format("Hello world\n").
+    
+    -compile(export_all).   %%到处所有
+P105 命令行参数的脚本 或使用escript
+p107 makefile
+p111 ctrl + G -> h%% stop a job in shell
+p112 调试环境
+    help().
+    b() --display all var
+    e(N)--repeat <N> expression
+    f() -- forget all var
+    f(X)-- forget sp. var
+    h() -- history
+    崩溃转储  webtool:start()
