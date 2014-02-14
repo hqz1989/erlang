@@ -135,4 +135,20 @@ p112 调试环境
     f() -- forget all var
     f(X)-- forget sp. var
     h() -- history
-    崩溃转储  webtool:start()
+    崩溃转储  webtool:start()  %% 监控工具
+p117 并发
+    Pid = spawn(Fun)
+    Pid ! Message
+    receive ... end.
+p124
+    erl +P 500000
+    erlang:system_info(process_limit)  %% 获得系统允许的最大进程数
+    receive
+        Pattern1 [when Guard1] ->
+            Expression1;
+        Pattern2 [when Guard2] ->
+            Expression2;
+     after Time ->
+        Expressions
+     end
+P 127

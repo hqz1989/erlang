@@ -1,5 +1,10 @@
 -module(lib_misc).
--export([qsort/1, pythag/1, perms/1, max/2, odds_and_evens_acc/1]).
+-export([qsort/1, pythag/1, perms/1, max/2, odds_and_evens_acc/1
+        ,sleep/1            %% stop process T
+        ,flush_buffer/0
+        ,priority_receive/0  %% don't handle when there are too many mails in email.
+
+        ]).
 
 %quick sort
 qsort([]) -> [];
@@ -38,3 +43,27 @@ odds_and_evens_acc([H|T], Odds, Evens) ->
 odds_and_evens_acc([], Odds, Evens) ->
     {lists:reverse(Odds), lists:reverse(Evens)}.
 
+%% p125
+sleep(T) ->
+    receive
+    after T -> true
+    end.
+
+flush_buffer() ->
+    receive
+        _Any ->
+            flush_buffer()
+    after 0 ->
+            true
+    end.
+
+priority_receive()->
+    receive
+        {alarm, X} ->
+            {alarm, X}
+    after 0 ->
+            receive
+                Any ->
+                    Any
+            end
+    end.

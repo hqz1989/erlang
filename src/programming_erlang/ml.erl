@@ -1,7 +1,7 @@
 -module(ml).
 -export([start/0]).
 
--ifdef(debug). %% c(ml, {d, debug}).
+-ifdef(debug). %% c(ml, {d, debug}). 
 -define(TRACE(X), io:format("TRACE ~p:~p ~p~n", [?MODULE, ?LINE, X])).
 -else.
 -define(TRACE(X), void).
