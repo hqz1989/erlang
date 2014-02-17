@@ -3,7 +3,7 @@
         ,sleep/1            %% stop process T
         ,flush_buffer/0
         ,priority_receive/0  %% don't handle when there are too many mails in email.
-
+        ,on_exit/2           %% send reason when process exit or crash
         ]).
 
 %quick sort
@@ -67,3 +67,13 @@ priority_receive()->
                     Any
             end
     end.
+
+on_exit(Pid, Fun) ->
+    spawn(fun() -> 
+                  process_flag(trap_exit, true),  %% change process to system process
+                  link(Pid),                      %% link sp. process with Pid to the new process. whe Pid exit, will sent info to system process and run Fun().
+                  receive
+                      {'EXIT', Pid, Why} ->
+                          Fun(Why)
+                  end
+          end).

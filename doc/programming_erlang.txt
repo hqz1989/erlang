@@ -151,4 +151,11 @@ p124
      after Time ->
         Expressions
      end
-P 127
+p127(112)
+    register(AnAtom, Pid)
+    unregister(AnAtom)
+    whereis(AnAtom)
+    registered() ->[AnAtom::atom()]
+p131(115)
+    spawn(Mod, FuncName, Args)
+p133 (117) on_exit()
