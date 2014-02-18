@@ -159,3 +159,13 @@ p127(112)
 p131(115)
     spawn(Mod, FuncName, Args)
 p133 (117) on_exit()
+    process_flag(trap_exit, true)
+p141 (125)
+    @spec spawn_link(Fun) -> Pid
+    @spec process_flag(trap_exit, true)
+    @spec link(Pid) ->true
+    @spec unlink(Pid) ->true
+    @spec exit(Why) ->none()
+    @spec exit(Pid, Why) ->true
+    @spec erlang:monitor(process, Item) -> MonitorRef
+p147 (131)

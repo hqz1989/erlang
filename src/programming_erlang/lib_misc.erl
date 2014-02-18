@@ -4,6 +4,7 @@
         ,flush_buffer/0
         ,priority_receive/0  %% don't handle when there are too many mails in email.
         ,on_exit/2           %% send reason when process exit or crash
+        ,keep_alive/2
         ]).
 
 %quick sort
@@ -77,3 +78,7 @@ on_exit(Pid, Fun) ->
                           Fun(Why)
                   end
           end).
+
+keep_alive(Name, Fun) ->
+    register(Name, Pid = spqwn(Fun)),
+    on_exit(Pid, fun(_Why) -> keep_alive(Name, Fun) end).
