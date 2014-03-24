@@ -11,3 +11,41 @@ start() ->
           end).
 stop() ->
     example1 ! stop.
+twice(X) ->
+    call_port({wice, X}).
+sum(X, Y) ->
+    call_port({sum, X, Y}).
+
+call_port(Msg) ->
+    example1 ! {call, self(), Msg},
+    receive
+        {example1, Result} ->
+            Result
+    end.
+
+loop(Port) ->
+    receive
+        {call, Caller, Msg} ->
+            Port ! {self(), {command, encode(Msg)}},
+            receive
+                {Port, {data, Data}} ->
+                    Caller ! {example1, decode(Data)}
+            end,
+            loop(Port);
+        stop ->
+            Port ! {self(), close},
+            receive
+                {Port, closed} ->
+                    exit(normal)
+            end;
+        {'EXIT', Port, Reason} ->
+            exit({port_terminated, Reason})
+    end.
+
+encode({twice, X}) ->
+    [1, X];
+encode({sum, X, Y}) ->
+    [2, X, Y].
+
+decode([Int]) ->
+    Int.
