@@ -1,20 +1,19 @@
 -module(example1).
--export([start/1, stop/0]).
+-export([start/0, stop/0]).
 -export([twice/1, sum/2]).
 
 start() ->
     spawn(fun() ->
                   register(example1, self()),
+    %%register(example1, spawn(fun() ->
                   process_flag(trap_exit, true),
-                  Port = opern_port({spawn, ".\example1"}, [{packet, 2}]),
+                  Port = open_port({spawn, "./example1"}, [{packet, 2}]),
                   loop(Port)
           end).
 stop() ->
     example1 ! stop.
-twice(X) ->
-    call_port({wice, X}).
-sum(X, Y) ->
-    call_port({sum, X, Y}).
+twice(X) -> call_port({twice, X}).
+sum(X, Y) -> call_port({sum, X, Y}).
 
 call_port(Msg) ->
     example1 ! {call, self(), Msg},
@@ -42,10 +41,7 @@ loop(Port) ->
             exit({port_terminated, Reason})
     end.
 
-encode({twice, X}) ->
-    [1, X];
-encode({sum, X, Y}) ->
-    [2, X, Y].
+encode({twice, X}) -> [1, X];
+encode({sum, X, Y}) -> [2, X, Y].
 
-decode([Int]) ->
-    Int.
+decode([Int]) -> Int.

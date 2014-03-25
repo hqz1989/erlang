@@ -7,11 +7,12 @@ int write_cmd(byte *buff, int len);
 
 int main()
 {
+    fprintf(stderr, "start example1_driver\n");
     int fn, arg1, arg2, result;
     byte buff[100];
 
     while (read_cmd(buff) > 0)
-    {
+    {fprintf(stderr, "read cmd[%s]\n", buff);
         fn = buff[0];
         if (fn == 1)
         {
@@ -19,11 +20,11 @@ int main()
             result = twice(arg1);
         }else if(fn == 2)
         {
-            arg1 == buff[1];
-            arg2 == buff[2];
-            /*for debug
-              fprintf(strerr, "calling sum %i %i\n", arg1, arg2);
-             */
+            arg1 = buff[1];
+            arg2 = buff[2];
+            ///*for debug
+              fprintf(stderr, "calling sum %i %i\n", arg1, arg2);
+             //*/
             result = sum(arg1, arg2);
         }
         buff[0] = result;
