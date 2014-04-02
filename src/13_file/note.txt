@@ -1,0 +1,5 @@
+file:consult("data1.dat"). %% read all content
+
+{ok, S} = file:open("data1.dat", read).
+io:read(S, '').
+file.close(S).

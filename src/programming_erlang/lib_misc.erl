@@ -5,6 +5,7 @@
         ,priority_receive/0  %% don't handle when there are too many mails in email.
         ,on_exit/2           %% send reason when process exit or crash
         ,keep_alive/2
+        ,consult/1
         ]).
 
 %quick sort
@@ -80,5 +81,23 @@ on_exit(Pid, Fun) ->
           end).
 
 keep_alive(Name, Fun) ->
-    register(Name, Pid = spqwn(Fun)),
+    register(Name, Pid = spawn(Fun)),
     on_exit(Pid, fun(_Why) -> keep_alive(Name, Fun) end).
+
+%% file:consult() of myself
+consult(File) ->
+    case file:open(File, read) of
+        {ok, S} ->
+            Val = consult1(S),
+            file:close(S),
+            {ok, Val};
+        {error, Why} ->
+            {error, Why}
+    end.
+
+consult1(S) ->
+    case io:read(S, '') of
+        {ok, Term} -> [Term|consult1(S)];
+        eof -> [];
+        Error -> Error
+    end.

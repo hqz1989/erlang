@@ -172,3 +172,6 @@ p147 (131)
 p179 (163)接口技术 也许linux 可以
 p188 (219)
 file filename filelib io
+
+*http://www.ptbus.com/empire/133153/
+*http://www.ptbus.com/view/32860/
