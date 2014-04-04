@@ -1,5 +1,32 @@
-file:consult("data1.dat"). %% read all content
+%% read all content at once
+file:consult("data1.dat"). 
 
+%% read one obj{} at once
 {ok, S} = file:open("data1.dat", read).
 io:read(S, '').
 file.close(S).
+
+%% read one line
+io:get_line(s, '').
+
+%% read all file as binary at once
+file:read_file("data1.dat").
+
+%% Random read
+{ok, S} = file:open("data1.dat", [read, binary, raw]).
+file:pread(S, 22, 46).    %%{ok, <<"rong\",\n\t[{occupation...">>}
+
+%% write one line
+{ok, S} = file:open("test2.dat", write).
+io:format(S, "~s~n", ["Hello readers"]).
+io:format(S, "~w~n", [123]).
+file:close(S).
+
+%% write all file at once P197(229)
+file:write_file(File, IO).
+%% dir
+file:list_dir(".").
+
+
+file:copy(Source, Destination).
+file:delete(File).
