@@ -6,7 +6,8 @@
         ,on_exit/2           %% send reason when process exit or crash
         ,keep_alive/2
         ,consult/1
-        ,ls/1]).
+%        ,ls/1
+        ]).
 
 %quick sort
 qsort([]) -> [];
@@ -102,15 +103,18 @@ consult1(S) ->
         Error -> Error
     end.
 
--include_lib("C:\\erl5.10.3\\lib\\kernel-2.16.3\\include\\file.hrl").
-file_size_and_type(File) ->
-    case file:read_file_info(File) of
-        {ok, Facts} ->
-            {Facts#file_info.type, Facts#file_info.size};
-        _ ->
-            error
-    end.
+%windows
+%-include_lib("C:\\erl5.10.3\\lib\\kernel-2.16.3\\include\\file.hrl").
+%linux
+%-include_lib("include/file.hrl").
+%file_size_and_type(File) ->
+%    case file:read_file_info(File) of
+%        {ok, Facts} ->
+%            {Facts#file_info.type, Facts#file_info.size};
+%        _ ->
+%            error
+%    end.
 
-ls(Dir) ->
-    {ok, L} = file:list_dir(Dir),
-    lists:map(fun(I) -> {I, file_size_and_type(I)} end, lists:sort(L)).
+%ls(Dir) ->
+%    {ok, L} = file:list_dir(Dir),
+%    lists:map(fun(I) -> {I, file_size_and_type(I)} end, lists:sort(L)).
