@@ -7,6 +7,7 @@
         ,keep_alive/2
         ,consult/1
 %        ,ls/1
+        ,string2value/1
         ]).
 
 %quick sort
@@ -118,3 +119,11 @@ consult1(S) ->
 %ls(Dir) ->
 %    {ok, L} = file:list_dir(Dir),
 %    lists:map(fun(I) -> {I, file_size_and_type(I)} end, lists:sort(L)).
+
+string2value(Str) ->
+    {ok, Tokens, _} = erl_scan:string(Str ++ "."),
+    %% generate
+    {ok, Exprs} = erl_parse:parse_exprs(Tokens),
+    Bindings = erl_eval:new_bindings(),
+    {value, Value, _} = erl_eval:exprs(Exprs, Bindings),
+    Value.
