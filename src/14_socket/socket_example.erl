@@ -7,6 +7,7 @@
         ,server/1%udp server
         ,client/1%udp client
         ,start_server/0
+        ,error_test/0
         ]).
 
 nano_get_url() ->
@@ -172,6 +173,29 @@ wait_for_ref(Socket, Ref) ->
                 {_SomeOtherRef, _} ->
                     % 对于其他数据则不能处理
                     wait_for_ref(Socket, Ref)
-            end;
-    after 1000 -> error
+            end
+        after 1000 -> error
+    end.
+%%error test
+error_test() ->
+    spawn(fun() -> error_test_server() end),
+    lib_misc:sleep(2000),
+    {ok, Socket} = gen_tcp:connect("localhost", 4321, [binary, {packet, 2}]),
+    io:format("connected to: ~p~n", [Socket]),
+    gen_tcp:send(Socket, <<"123">>),
+    receive
+        Any ->
+            io:format("Any~p~n", [Any])
+    end.
+error_test_server() ->
+    {ok, Listen} = gen_tcp:listen(4321, [binary, {packet, 2}]),
+    {ok, Socket} = gen_tcp:accept(Listen),
+    error_test_server_loop(Socket).
+
+error_test_server_loop(Socket) ->
+    receive
+        {tcp, Socket, Data} ->
+            io:format("received: ~p~n", [Data]),
+            %atom_to_list(Data),
+            error_test_server_loop(Socket)
     end.
