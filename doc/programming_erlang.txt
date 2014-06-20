@@ -180,3 +180,8 @@ p202(235)
 p213(249) socket
 http://www.cnblogs.com/scheme/p/3507122.html
 p220(258)
+skip to
+p229(267)
+@spec etc:new(Name, [Opt]) -> TableId
+    [Opt] -- [set | ordered_set | bag | duplicate_bag, public | protected | named_table, {keypos, k}] default [set, protected, {keypos, 1}]
+p234 / 444
