@@ -295,3 +295,15 @@ erlang module的所有BIFs列表见:http://www.erlang.org/doc/man/erlang.html
     
 24. Erlang make
     http://hideto.iteye.com/blog/245540
+
+25. 类库
+    -import(lists, [reverse/1]).                lists:reverse
+    -import(lists, [map/2, sum/1]).
+    
+    lists:foreach(fun test_ets/1,
+            [set, ordered_set, bag, duplicate_bag]).
+    io:format("Process spawn time= ~p(~p) microseconds~n", [U1, U2]).
+    lists:seq(1, N)
+    lists:map(fun(I) -> {I, file_size_and_type(I)} end, lists:sort(L)).
+    lists:sort(L)
+    lists:delete(Socket, Sockets);

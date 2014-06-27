@@ -3,4 +3,8 @@ deps
 *.o
 *.beam
 *.plt
+
+*.set
+*.tab
+*.gz
 erl_crash.dump

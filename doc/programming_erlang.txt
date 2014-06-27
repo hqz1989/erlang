@@ -185,3 +185,4 @@ p229(267)
 @spec etc:new(Name, [Opt]) -> TableId
     [Opt] -- [set | ordered_set | bag | duplicate_bag, public | protected | named_table, {keypos, k}] default [set, protected, {keypos, 1}]
 p234 / 444
+p244 / 444
