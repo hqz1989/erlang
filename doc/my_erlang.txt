@@ -307,3 +307,4 @@ erlang module的所有BIFs列表见:http://www.erlang.org/doc/man/erlang.html
     lists:map(fun(I) -> {I, file_size_and_type(I)} end, lists:sort(L)).
     lists:sort(L)
     lists:delete(Socket, Sockets);
+    dict:new(), dict:store(), dict:find() 关于字典
