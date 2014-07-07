@@ -7,12 +7,27 @@
 %%  Visit http://www.pragmaticprogrammer.com/titles/jaerlang for more book information.
 %%---
 -module(ptests).
--export([tests/1, fib/1]).
+-export([tests/1, fib/1, test_me/1, tests2/1]).
 -import(lists, [map/2]).
 -import(lib_misc, [pmap/2]).
 
+%% usage ptests:test_me([1]).
+test_me([N]) -> N.
+%% atom_to_list(help)  => "help"
+%% atom_to_list(1)  => error
+%% atom_to_list("1")  => error
+%% atom_to_list('11')  => "11"
+
+%% so you can run it with:
+%% usage ptests:test_me([help]). error
+%% usage ptests:test_me(['12']). sucess
 tests([N]) ->
     Nsched = list_to_integer(atom_to_list(N)),
+    run_tests(1, Nsched).
+
+tests2(N) ->   %% error!!! can't run a erlang with int as parameter
+    Nsched = N,  
+    %%Nsched = list_to_integer(N),    so you can run it with tests2(N)
     run_tests(1, Nsched).
 
 run_tests(N, Nsched) ->

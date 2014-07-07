@@ -8,15 +8,20 @@
         ,consult/1
 %        ,ls/1
         ,string2value/1
+        ,pmap/2
         ]).
 
-%quick sort : usage qsort("321")   => "123"
+%% 列表推断 List Comprehensions
+%% [Expr || Qualifier1,...,QualifierN]
+%quick sort : usage => qsort("321") => "123"
 qsort([]) -> [];
 qsort([Pivot | T]) -> 
         qsort([X || X <- T, X < Pivot])
         ++[Pivot]++
         qsort([X || X <- T, X >= Pivot]).   %% X ++ Y ++ Z : [X, Y, Z]
 
+%% lists:seq(1, 10).   => [1,2,3,4,5,6,7,8,9,10]
+%% lists:seq(1, 20, 3). => [1,4,7,10,13,16,19]
 pythag(N) ->
     [{A, B, C} ||
         A <- lists:seq(1, N),
@@ -127,3 +132,27 @@ string2value(Str) ->
     Bindings = erl_eval:new_bindings(),
     {value, Value, _} = erl_eval:exprs(Exprs, Bindings),
     Value.
+
+%%multi core, chapter 20
+pmap(F, L) ->
+    S = self(),
+    %% make_ref() returns a unique reference
+    %% we'll match on this later
+    Ref = erlang:make_ref(),
+    Pids = lists:map(fun(I) -> 
+                       spawn(fun() -> do_f(S, Ref, F, I) end) 
+               end, L),
+    
+    %% gather the results
+    gather(Pids, Ref).
+
+do_f(Parent, Ref, F, I) ->
+    Parent ! {self(), Ref, (catch F(I))}.
+
+gather([Pid|T], Ref) ->
+    receive
+        {Pid, Ref, Ret} -> [Ret | gather(T, Ref)]
+    end;
+gather([], _) ->
+    [].
+

@@ -308,3 +308,124 @@ erlang module的所有BIFs列表见:http://www.erlang.org/doc/man/erlang.html
     lists:sort(L)
     lists:delete(Socket, Sockets);
     dict:new(), dict:store(), dict:find() 关于字典
+    
+26. 转换
+atom_to_list(hello).                        "hello"
+list_to_atom("hello").                      hello
+binary_to_list(<<"hello">>).                "hello"
+binary_to_list(<<104,101,108,108,111>>).    "hello"
+list_to_binary("hello").                    <<104,101,108,108,111>>
+float_to_list(7.0).                         "7.00000000000000000000e+00"
+list_to_float("7.000e+00").                 7.0
+integer_to_list(77).                        "77"
+list_to_integer("77").                      77
+tuple_to_list({a,b,c}).                     [a,b,c]
+list_to_tuple([a,b,c]).                     {a,b,c}
+term_to_binary({a,b,c}).                    <<131,104,3,100,0,1,97,100,0,1,98,100,0,1,99>>
+binary_to_term(<<131,104,3,100,0,1,97,100,0,1,98,100,0,1,99>>).                     {a,b,c}
+
+27.Erlang中小于等于是用=<表示，而不是一般语言中的<=语法，我犯过错误的地方，同样，不等于都是用/号，而不是!,比如/=、=/=。
+
+28.and和or会计算两边的表达式，而andalso和orelse的求值采用短路机制
+29.
+    关于分布式编程，需要补充的几点
+    1）节点之间的连接默认是transitive，也就是当节点A连接了节点B，节点B连接了节点C，那么节点A也与节点C互相连接
+    可以通过启动节点时指定参数-connect_all false来取消默认行为
+    2）隐藏节点，某些情况下，你希望连接一个节点而不去连接其他节点，你可以通过在节点启动时指定-hidden选项
+    来启动一个hidden node。在此情况下，通过nodes()查看所有连接的节点将不会出现隐藏的节点，想看到隐藏的节点
+    可以通过nodes(hidden)或者nodes(connected)来查看。
+    完整的erl选项如下：
+    -connect_all false	上面已经解释。
+    -hidden	启动一个hidden node
+    -name Name	启动一个系统成为节点，使用long name.
+    -setcookie Cookie	与Erlang:set_cookie(node(), Cookie).相同，设置magic cookie
+    -sname Name	启动一个Erlang系统作为节点，使用short name 
+29.
+    Process Dictionary，每个进程都有自己的process dictionary，用于存储这个进程内的全局变量，可以通过下列
+    BIFs操作：
+    put(Key, Value)
+    get(Key)
+    get()
+    get_keys(Value)
+    erase(Key)
+    erase()
+    
+30.
+    宏，定义常量或者函数等等，语法如下：
+    -define(Const, Replacement).
+    -define(Func(Var1,...,VarN), Replacement).
+
+    使用的时候在宏名前加个问号？，比如?Const，Replacement将插入宏出现的位置。系统预定义了一些宏:
+    ?MODULE   表示当前模块名
+
+    ?MODULE_STRING 同上，但是以字符串形式
+    ?FILE    当前模块的文件名
+    ?LINE    调用的当前代码行数
+    ?MACHINE  机器名
+
+    Erlang的宏与C语言的宏很相似，同样有宏指示符，包括：
+    -undef(Macro).
+    取消宏定义
+    -ifdef(Macro).
+    当宏Macro有定义的时候，执行以下代码
+    -ifndef(Macro).
+    同上，反之
+    -else.
+    接在ifdef或者ifndef之后，表示不满足前者条件时执行以下代码
+
+    -endif.
+    if终止符
+    假设宏-define(Square(X),X*X).用于计算平方，那么??X将返回X表达式的字符串形式，类似C语言中#arg
+
+    一个简单的宏例子：
+
+    -module(macros_demo).
+    -ifdef(debug).
+    -define(LOG(X), io:format("{~p,~p}: ~p~n", [?MODULE,?LINE,X])).
+    -else.
+    -define(LOG(X), true).
+    -endif.
+    -define(Square(X),X*X).
+    -compile(export_all).
+    test()->
+        A=3,
+        ?LOG(A),
+        B=?Square(A),
+        io:format("square(~w) is ~w~n",[A,B]).
+
+    当编译时不开启debug选项的时候：
+    17> c(macros_demo).
+    {ok,macros_demo}
+    18> macros_demo:test().
+    square(3) is 9
+
+    当编译时开启debug之后：
+
+    19> c(macros_demo,{d,debug}).
+    {ok,macros_demo}
+    20> macros_demo:test().
+    {macros_demo,11}: 3
+    square(3) is 9
+    ok
+
+    可以看到LOG的输出了，行数、模块名以及参数
+31.
+    模块的预定义属性：
+    -module(Module).    声明模块名称，必须与文件名相同
+    -export(Functions).   指定向外界导出的函数列表
+    -import(Module,Functions).   引入函数，引入的函数可以被当作本地定义的函数使用
+    -compile(Options).     设置编译选项，比如export_all
+    -vsn(Vsn).         模块版本，设置了此项，可以通过beam_lib:version/1 获取此项信息
+    可以通过-include和-include_lib来包含文件，两者的区别是include-lib不能通过绝对路径查找文件，而是在你当前Erlang的lib目录进行查找。
+    
+32.Erlang入门（四）
+33.运行时失败
+badmatch - 匹配失败，比如一个进程进行1=3的匹配，这个进程将终止，并发出{'EXIT', From, badmatch}信号给连接的进程
+badarg  - 顾名思义，参数错误，比如atom_to_list(123),数字不是atom，因此将发出{'EXIT', From, badarg}信号给连接进程
+case_clause - 缺少分支匹配，比如
+if_clause - 同理，if语句缺少匹配分支
+function_clause - 缺少匹配的函数，比如：
+undef - 进程执行一个不存在的函数
+badarith - 非法的算术运算，比如1+foo。
+timeout_value - 非法的超时时间设置，必须是整数或者infinity
+nocatch - 使用了throw，没有相应的catch去通讯。
